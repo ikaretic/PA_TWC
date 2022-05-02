@@ -61,6 +61,7 @@ def Train(sess, env, weight_file):
             if reward > max_reward:
                 dnn.save_params()
                 max_reward = reward
+            #TODO: use print(f"")
             print("Episode(train):%d   DDPG: %.3f  Loss: %.3f  Time cost: %.2fs" 
                   %(k, reward, np.mean(loss_hist[-interval:]), time.time()-st))
             st = time.time() 
@@ -168,7 +169,8 @@ def Test_ddpg_time(weight_file, max_episode, Ns, fd, max_dis, maxM):
 if __name__ == '__main__':
     env = Env_cellular(fd, Ts, n_x, n_y, L, C, maxM, min_dis, max_dis, max_p, p_n, power_num)
     weight_file = 'C:/Software/workshop/python/ddpg_2.mat'
-    tf.reset_default_graph()
+    #tf.reset_default_graph()
+    tf.compat.v1.reset_default_graph()
     with tf.Session() as sess:
         reward_train = Train(sess, env, weight_file)
       

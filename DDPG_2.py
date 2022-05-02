@@ -8,7 +8,8 @@ end-to-end DDPG
 import scipy
 import numpy as np
 import tensorflow as tf
-reuse=tf.AUTO_REUSE
+#reuse=tf.AUTO_REUSE
+reuse=tf.compat.v1.AUTO_REUSE
 dtype = np.float32
 
 class DDPG:
