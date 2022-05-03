@@ -6,8 +6,10 @@ end-to-end DDPG
 @author: mengxiaomao
 """
 import scipy
+import scipy.io
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 #reuse=tf.AUTO_REUSE
 reuse=tf.compat.v1.AUTO_REUSE
 dtype = np.float32

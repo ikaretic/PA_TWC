@@ -10,7 +10,9 @@ Baseline 3 feature: 1.751
 """
 import time
 import numpy as np
-import tensorflow as tf
+#import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 from Environment_CU import Env_cellular
 from DDPG_2 import DDPG, Actor, Critic
 
@@ -168,7 +170,8 @@ def Test_ddpg_time(weight_file, max_episode, Ns, fd, max_dis, maxM):
     
 if __name__ == '__main__':
     env = Env_cellular(fd, Ts, n_x, n_y, L, C, maxM, min_dis, max_dis, max_p, p_n, power_num)
-    weight_file = 'C:/Software/workshop/python/ddpg_2.mat'
+    #weight_file = 'C:/Software/workshop/python/ddpg_2.mat'
+    weight_file = 'ddpg_2.mat'
     #tf.reset_default_graph()
     tf.compat.v1.reset_default_graph()
     with tf.Session() as sess:
