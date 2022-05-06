@@ -17,25 +17,25 @@ dtype = np.float32
 
 class Env_cellular():
     def __init__(self, fd, Ts, n_x, n_y, L, C, maxM, min_dis, max_dis, max_p, p_n, power_num):
-        self.fd = fd 
-        self.Ts = Ts
-        self.n_x = n_x
-        self.n_y = n_y
+        self.fd = fd # max. Doppler frequency
+        self.Ts = Ts # time interval between adjacent instants
+        self.n_x = n_x # number of cells/BSs in x direction
+        self.n_y = n_y # number of cells/BSs in y direction
         self.L = L
-        self.C = C
-        self.maxM = maxM   # user number in one BS
-        self.min_dis = min_dis #km
-        self.max_dis = max_dis #km
-        self.max_p = max_p #dBm
-        self.p_n = p_n     #dBm
+        self.C = C # no. of first interferers probably, I_c in the paper
+        self.maxM = maxM   # user number in one BS, where users are located uniformly and randomly between min_dis and max_dis
+        self.min_dis = min_dis #km, inner space distance
+        self.max_dis = max_dis #km, half cell-to-cell distance
+        self.max_p = max_p #dBm, probably P_max in the paper
+        self.p_n = p_n     #dBm, AWGN power probably
         self.power_num = power_num
         
-        self.c = 3*self.L*(self.L+1) + 1 # adjascent BS
+        self.c = 3*self.L*(self.L+1) + 1 # adjascent BS --> cardinality of adjacent cells
         self.K = self.maxM * self.c # maximum adjascent users, including itself
 #        self.state_num = 2*self.C + 1    #  2*C + 1
         self.state_num = 3*self.C + 2    #  C + 1
         self.N = self.n_x * self.n_y # BS number
-        self.M = self.N * self.maxM # maximum users
+        self.M = self.N * self.maxM # maximum users in total
         self.W = np.ones((self.M), dtype = dtype)         #[M]
         self.sigma2 = 1e-3*pow(10., self.p_n/10.)
         self.maxP = 1e-3*pow(10., self.max_p/10.)

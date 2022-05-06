@@ -22,7 +22,7 @@ n_x = 5
 n_y = 5
 L = 2
 C = 16
-maxM = 4   # user number in one BS
+maxM = 4   
 min_dis = 0.01 #km
 max_dis = 1. #km
 max_p = 38. #dBm
@@ -47,6 +47,12 @@ def Train(sess, env, weight_file):
         reward_list = list()
         loss_list = list()
         s_actor, s_critic = env.reset()
+        #debug
+        print(s_actor.shape)
+        print(s_critic.shape)
+        print(env.M)
+        print(s_actor[0][0])
+
         for i in range(int(Ns)-1):
             p, p_exp = actor.get_random_action(s_actor, k)
             s_actor_next, s_critic_next, q_tar, r = env.step(p_exp[:,0])
